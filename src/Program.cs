@@ -17,7 +17,7 @@
 #endregion Step3: Build the application
 
 #region Step4: Middleware Pipeline Configuration
-
+    app.MapGet("/", () => "Hello World!");
 #endregion Step4: Middleware Pipeline Configuration
 
 #region Step5: Start the Application

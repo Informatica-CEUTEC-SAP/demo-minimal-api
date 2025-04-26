@@ -4,6 +4,7 @@
     
 #region Step2: Service Registration
 #region Step2.1: Add services to the DI container.
+    builder.Services.AddControllers();
     // Addd Swagger services.
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
@@ -20,26 +21,16 @@
 
 #region Step4: Middleware Pipeline Configuration
     #region Step4.1: Configure the HTTP request pipeline.
+        app.UseHttpsRedirection();
+        app.MapControllers();
     
         if (app.Environment.IsDevelopment())
         {
-            // middleware for Swagger
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-
-        app.UseHttpsRedirection();
     
     #endregion Step4.1: Configure the HTTP request pipeline.
-    
-    app.MapGet("/", () => "Hello World!")
-        .WithName("GetHelloWorld")
-        .WithDescription("This is a simple hello world endpoint.")
-        .WithTags("HelloWorld")
-        .WithSummary("Hello World Endpoint")
-        .Produces<string>(StatusCodes.Status200OK)
-        .Produces(StatusCodes.Status500InternalServerError);
-    
 #endregion Step4: Middleware Pipeline Configuration
 
 #region Step5: Start the Application
